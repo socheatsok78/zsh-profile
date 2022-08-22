@@ -15,7 +15,7 @@
 #
 # Now edit your ~/.zshrc
 # Add the following line:
-#   zsh-profile jonh .zshrc
+#   eval $(zsh-profile jonh .zshrc)
 #
 # All done!
 
@@ -24,33 +24,42 @@ ZSH_PROFILE_DATA_DIR="$HOME/.zshprofile"
 
 ZSH_PROFILE_TARGET="$1"
 test -z "$ZSH_PROFILE_TARGET" && {
-    echo "$ME: Please specify a profile.";
+    echo "echo $ME: Please specify a profile.";
     exit 1
 }
 
 ZSH_PROFILE_SOURCE="$2"
 test -z "$ZSH_PROFILE_SOURCE" && {
-    echo "$ME: Please specify a profile source.";
+    echo "echo $ME: Please specify a profile source.";
     exit 2
 }
 
 # check if profile directory exists
 if [ ! -d "$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET" ]; then
-    echo "$ME: $ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET: No such file or directory"
+    echo "echo $ME: $ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET: No such file or directory"
     exit 3
 fi
 
 # check if profile source exists
 if [ ! -f "$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE" ]; then
-    echo "$ME: $ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE: No such file or directory"
+    echo "echo $ME: $ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE: No such file or directory"
     exit 4
 fi
 
 # if there were no errors found, this block will execute!
 # main
-ZSH_PROFILE_HOME="$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET"
+ZSH_PROFILE_EVAL=()
+ZSH_PROFILE_EVAL+=("ZSH_PROFILE_DATA_DIR=\"$ZSH_PROFILE_DATA_DIR\"")
+ZSH_PROFILE_EVAL+=("ZSH_PROFILE_TARGET=\"$ZSH_PROFILE_TARGET\"")
+ZSH_PROFILE_EVAL+=("ZSH_PROFILE_HOME=\"$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET\"")
+ZSH_PROFILE_EVAL+=("source \"$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE\"")
+ZSH_PROFILE_EVAL+=("unset ZSH_PROFILE_HOME")
+ZSH_PROFILE_EVAL+=("unset ZSH_PROFILE_TARGET")
+ZSH_PROFILE_EVAL+=("unset ZSH_PROFILE_DATA_DIR")
 
-echo "$ME sourced: $ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE"
-source "$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE"
+ZSH_PROFILE_EVAL_SOURCE=""
+for line in "${ZSH_PROFILE_EVAL[@]}"; do
+    ZSH_PROFILE_EVAL_SOURCE+="${line}\n"
+done
 
-unset ZSH_PROFILE_HOME
+echo "$ZSH_PROFILE_EVAL_SOURCE"

@@ -22,7 +22,7 @@ touch .zshrc
 
 Now edit your `~/.zshrc`, Add the following line:
 ```sh
-zsh-profile jonh .zshrc
+eval "$(zsh-profile jonh .zshrc)"
 ```
 
 All done!
