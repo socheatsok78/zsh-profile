@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # Use at your own risk!
 # Just a plain simple zsh profile management
 
 # Usage
 #
 # Create a ".zshprofile" directory in your home directory
-# Run: mkdir -p .zshprofile
+# Run: mkdir -p ~/.zshprofile
 #
 # Create your profile in the ".zshprofile" directory
 # Example: jonh
@@ -48,5 +48,9 @@ fi
 
 # if there were no errors found, this block will execute!
 # main
+ZSH_PROFILE_HOME="$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET"
+
 echo "$ME sourced: $ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE"
 source "$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE"
+
+unset ZSH_PROFILE_HOME
