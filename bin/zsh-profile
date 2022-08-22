@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Use at your own risk!
+# Just a plain simple zsh profile management
+
+# Usage
+#
+# Create a ".zshprofile" directory in your home directory
+# Run: mkdir -p .zshprofile
+#
+# Create your profile in the ".zshprofile" directory
+# Example: jonh
+#
+# Add your source file your newly created profile directory
+# Example: .zshrc
+#
+# Now edit your ~/.zshrc
+# Add the following line:
+#   zsh-profile jonh .zshrc
+#
+# All done!
+
+ME=$(basename $0)
+ZSH_PROFILE_DATA_DIR="$HOME/.zshprofile"
+
+ZSH_PROFILE_TARGET="$1"
+test -z "$ZSH_PROFILE_TARGET" && {
+    echo "$ME: Please specify a profile.";
+    exit 1
+}
+
+ZSH_PROFILE_SOURCE="$2"
+test -z "$ZSH_PROFILE_SOURCE" && {
+    echo "$ME: Please specify a profile source.";
+    exit 2
+}
+
+# check if profile directory exists
+if [ ! -d "$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET" ]; then
+    echo "$ME: $ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET: No such file or directory"
+    exit 3
+fi
+
+# check if profile source exists
+if [ ! -f "$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE" ]; then
+    echo "$ME: $ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE: No such file or directory"
+    exit 4
+fi
+
+# if there were no errors found, this block will execute!
+# main
+echo "$ME sourced: $ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE"
+source "$ZSH_PROFILE_DATA_DIR/$ZSH_PROFILE_TARGET/$ZSH_PROFILE_SOURCE"
