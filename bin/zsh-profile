@@ -5,9 +5,9 @@
 # Usage
 #
 # Create a ".zshprofile" directory in your home directory
-# Run: mkdir -p ~/.zshprofile
+# Run: mkdir -p ~/.zsh_profiles
 #
-# Create your profile in the ".zshprofile" directory
+# Create your profile in the ".zsh_profiles" directory
 # Example: jonh
 #
 # Add your source file your newly created profile directory
@@ -20,7 +20,7 @@
 # All done!
 
 ME=$(basename $0)
-ZSH_PROFILE_DATA_DIR="$HOME/.zshprofile"
+ZSH_PROFILE_DATA_DIR="$HOME/.zsh_profiles"
 
 ZSH_PROFILE_TARGET="$1"
 test -z "$ZSH_PROFILE_TARGET" && {
