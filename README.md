@@ -11,6 +11,12 @@ mkdir -p .zsh_profiles
 git clone https://github.com/socheatsok78/zsh-profile.git ~/.zsh_profiles/lib
 ```
 
+Edit `.zshrc` and add `~/.zsh_profiles/lib/bin` to `PATH` variable
+
+```
+export PATH="~/.zsh_profiles/lib/bin:$PATH"
+```
+
 ## Usage
 
 Create your profile in the `.zsh_profiles` directory
