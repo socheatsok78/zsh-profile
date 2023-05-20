@@ -1,12 +1,17 @@
 # zsh-profile
 Just a plain simple zsh profile management
 
-# Usage
+## Install
 
 Create a `.zsh_profiles` directory in your home directory
+
 ```sh
 mkdir -p .zsh_profiles
+# Run this to download the cli
+git clone https://github.com/socheatsok78/zsh-profile.git ~/.zsh_profiles/lib
 ```
+
+## Usage
 
 Create your profile in the `.zsh_profiles` directory
 ```sh
