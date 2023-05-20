@@ -3,14 +3,14 @@ Just a plain simple zsh profile management
 
 # Usage
 
-Create a `.zshprofile` directory in your home directory
+Create a `.zsh_profiles` directory in your home directory
 ```sh
-mkdir -p .zshprofile
+mkdir -p .zsh_profiles
 ```
 
-Create your profile in the `.zshprofile` directory
+Create your profile in the `.zsh_profiles` directory
 ```sh
-cd .zshprofile
+cd .zsh_profiles
 mkdir jonh
 ```
 
